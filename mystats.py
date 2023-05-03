@@ -1,0 +1,39 @@
+# Variance of Shifted Data to avoid the catastrophic cancellation
+def svar(mydata):
+    # https://en.wikipedia.org/wiki/Algorithms_for_calculating_variance
+    # Computing Shifted Data, let K (location parameter) be mean
+    N = len(mydata)
+    K = sum(mydata)/N
+    
+    sdata = [x - K for x in mydata]
+    
+    Sum1 = sum([x**2 for x in sdata])
+    Sum2 = (sum(sdata))**2/N
+    
+    return (Sum1 - Sum2)/(N-1)
+
+# Autocorrelation Function with default upper bound of lag = 200
+def accor(mydata,lag_max=200):
+    # https://scicoding.com/4-ways-of-calculating-autocorrelation-in-python/
+    # modified definition of variance to 10.1021/ct0502864
+    # computed as variance of shifted data, K = mean
+    N = len(mydata)
+    mymean = sum(mydata)/N
+    myvar = svar(mydata)
+    
+    minlag = max(int(N/50),1)
+    maxlag = min(N,int(lag_max))
+    lags = range(minlag,maxlag)
+    
+    myacorr = {} 
+    sdata = [x - mymean for x in mydata]
+    
+    for l in lags:
+        c = 1 # Self correlation
+        if (l > 0):
+            tmp = [sdata[l:][i] * sdata[:-l][i] for i in range(len(mydata) - l)]
+            c = sum(tmp)/(len(mydata) - l)/myvar
+        myacorr[l] = c
+        
+    return myacorr
+
