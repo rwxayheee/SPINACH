@@ -1,4 +1,5 @@
 import numpy as np
+from mystats import *
 
 def en_parser(en_file):
     with open(en_file,"r") as f:
