@@ -22,7 +22,7 @@ The motive of this effort is to obtain the weights for error propagation. Here a
 3. The weights by intervals are additive. 
 4. The breakdown of weights (by order of the terms in polynomial interpolators) are additive. 
 
-Segmental interpolation and extrapolation by polynomials have exact solutions to weights. The implementation of linear (in progress) and cubic splines in this tool is mainly inspired by: 
+Segmental interpolation and extrapolation by polynomials have exact solutions to weights. The implementation of linear and cubic splines in this tool is mainly inspired by: 
 The appendix of doi/10.1021/ct2003995l; 
 https://github.com/MobleyLab/alchemical-analysis/blob/507e157b1a9658aa21c7bee100695ce66f2ad71d/alchemical_analysis/alchemical_analysis.py; and
 Applied numerical methods with MATLAB® for engineers and scientists / Steven C. Chapra, Berger Chair in Computing and Engineering, Tufts University. 
@@ -47,3 +47,5 @@ In the interpolated segments, the segment-wise weights of f(x) can now be obtain
 
 The cubic function uses natural cubic spline as the interpolator and it currently supports natural and linear extrapolation. The linear extrapolation essentially ignores the quartic components in the integral (or equivalently, the d is forced to be 0) of the extrapolated segments. The extrapolated segments also have c=0 in accordance to the natural end condition. 
 
+Full doc with equations at: 
+https://docs.google.com/document/d/1cdzjvWCLHGfLKSw0Qeun3R_36pQrMPxskibRasMrRYI/edit?usp=sharing
